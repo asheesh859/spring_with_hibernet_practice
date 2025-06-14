@@ -24,7 +24,7 @@ class DemoApplicationTests {
 	}
 	@AfterEach
 	void test3(){
-
+		System.out.println("After each test case");
 	}
 	@BeforeEach
 	void test4(){
