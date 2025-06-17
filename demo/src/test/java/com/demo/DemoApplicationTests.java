@@ -93,7 +93,38 @@ class DemoApplicationTests {
 	long count = employeeRepository.count();
 	System.out.println(count);
 }
+@Test
+	void findRecordByEmail(){
+	Optional<Employee> result = employeeRepository.findByEmailId("pashu882@gmail.com");
+	if(result.isPresent()){
+		Employee emp = result.get();
+		System.out.println(emp.getFirstName());
+		System.out.println(emp.getLastName());
+		System.out.println(emp.getMobile());
+		System.out.println(emp.getEmailId());
 
+
+	}else {
+		System.out.println("No record found");
+	}
+}
+
+@Test
+	void existsByEmailId(){
+	boolean result = employeeRepository.existsByEmailId("pashu882@gmail.com");
+	if(result){
+		Optional<Employee> res =  employeeRepository.findByEmailId("pashu882@gmail.com");
+		if(res.isPresent()){
+			Employee emp = res.get();
+			System.out.println(emp.getFirstName());
+			System.out.println(emp.getLastName());
+			System.out.println(emp.getMobile());
+			System.out.println(emp.getEmailId());
+		}else{
+			System.out.println("No data found ..");
+		}
+	}
+}
 
 
 
