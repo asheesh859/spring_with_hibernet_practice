@@ -8,7 +8,9 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.net.SocketTimeoutException;
 import java.sql.SQLOutput;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -126,6 +128,55 @@ class DemoApplicationTests {
 	}
 }
 
+@Test
+	void existByMobile(){
+		boolean result  = employeeRepository.existsByMobile("8279827373");
+		if(!result){
+			System.out.println("Data not found");
+		}else{
+			Optional<Employee> res = employeeRepository.findByMobile("8279827373");
+			if(res.isPresent()){
+				Employee emp = res.get();
+				System.out.println(emp.getId());
+				System.out.println(emp.getFirstName());
+				System.out.println(emp.getLastName());
+				System.out.println(emp.getMobile());
+				System.out.println(emp.getEmailId());
+			}else{
+				System.out.println("employee not found....");
+			}
 
+		}
+}
+
+@Test
+	void findByNameContaining(){
+	List<Employee> result = employeeRepository.findByFirstNameContaining("m");
+	for(Employee e: result){
+		System.out.println(e.getFirstName());
+	}
+}
+
+@Test
+	void findNameStartWith(){
+		List<Employee> result = employeeRepository.findByFirstNameStartingWith("m");
+		for(Employee _result : result){
+			System.out.println(_result.getFirstName());
+		}
+}
+@Test
+	void findNameEndWith(){
+	List<Employee> _result = employeeRepository.findByFirstNameEndingWith("u");
+	for(Employee emp :_result){
+		System.out.println(emp.getFirstName());
+	}
+
+}
+
+@Test
+void countRecordUsingEmail(){
+		Long _count = employeeRepository.countByEmailId("pashu882@gmail.com");
+		System.out.println(_count);
+}
 
 }
