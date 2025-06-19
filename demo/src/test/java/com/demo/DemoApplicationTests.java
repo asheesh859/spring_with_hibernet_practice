@@ -241,5 +241,35 @@ void countRecordUsingEmail(){
 		}
 
 	}
+	@Test
+	void searchRecordByEmailAndMobile(){
+		Optional<Employee> _result = employeeRepository.searchByEmailAndMobile("pashu882@gmail.com", "8279827373");
+		if(_result.isEmpty()){
+			System.out.println("No record found");
+		}else {
+			Employee _employee = _result.get();
+			System.out.println(_employee.getId());
+			System.out.println(_employee.getFirstName());
+			System.out.println(_employee.getLastName());
+			System.out.println(_employee.getEmailId());
+			System.out.println(_employee.getMobile());
+		}
+	}
+@Test
+	void findRecordbyEmailAndMobileSql(){
+		Optional<Employee> _result =employeeRepository.seachRecordByEmailAndMobileSql("sumanreddy@gmail.com" , "9808507930");
+		if(_result.isPresent()){
+			Employee employee = _result.get();
+			System.out.println(employee.getId());
+			System.out.println(employee.getFirstName());
+			System.out.println(employee.getLastName());
+			System.out.println(employee.getEmailId());
+			System.out.println(employee.getMobile());
+
+		}else{
+			System.out.println("No data found check email and mobile number .. ");
+		}
+}
 
 }
+

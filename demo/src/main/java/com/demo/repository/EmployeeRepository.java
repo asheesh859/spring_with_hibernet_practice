@@ -1,6 +1,7 @@
 package com.demo.repository;
 
 import com.demo.entity.Employee;
+import org.aspectj.weaver.loadtime.Options;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -26,4 +27,10 @@ public interface EmployeeRepository extends CrudRepository<Employee , Integer> {
 
      @Query("select e from Employee e where e.mobile=:m")
     Optional<Employee> searchByMobile(@Param("m") String _mobile);
+
+     @Query("select emp from Employee emp where emp.emailId=:e and emp.mobile=:m")
+     Optional<Employee> searchByEmailAndMobile(@Param("e") String _email , @Param("m") String _mobile);
+
+     @Query(value = "Select * from employee where email_id =?1 and mobile_no =?2" , nativeQuery = true)
+    Optional<Employee> seachRecordByEmailAndMobileSql(String _email , String _mobile);
 }
