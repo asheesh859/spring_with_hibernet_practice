@@ -258,7 +258,7 @@ void countRecordUsingEmail(){
 @Test
 	void findRecordbyEmailAndMobileSql(){
 		Optional<Employee> _result =employeeRepository.seachRecordByEmailAndMobileSql("sumanreddy@gmail.com" , "9808507930");
-		if(_result.isPresent()){
+		if(_result.isPresent()) {
 			Employee employee = _result.get();
 			System.out.println(employee.getId());
 			System.out.println(employee.getFirstName());
