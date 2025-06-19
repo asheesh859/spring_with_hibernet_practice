@@ -179,4 +179,20 @@ void countRecordUsingEmail(){
 		System.out.println(_count);
 }
 
+@Test
+	void findRecordWithEmailAndMobile(){
+		Optional<Employee> employee= employeeRepository.findByEmailIdAndMobile("pashu882@gmail.com" , "8279827373");
+		if(employee.isPresent()){
+			Employee emp = employee.get();
+
+			System.out.println(emp.getId());
+			System.out.println(emp.getFirstName());
+			System.out.println(emp.getLastName());
+			System.out.println(emp.getEmailId());
+
+		}else{
+			System.out.println("No record found..");
+		}
+}
+
 }

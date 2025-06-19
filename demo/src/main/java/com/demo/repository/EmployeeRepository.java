@@ -15,4 +15,7 @@ public interface EmployeeRepository extends CrudRepository<Employee , Integer> {
     List<Employee> findByFirstNameStartingWith(String prefix);
     List<Employee> findByFirstNameEndingWith(String suffix);
     Long countByEmailId(String _email);
+
+    Optional<Employee>  findByEmailIdAndMobile(String _email , String _mobile);
+
 }
