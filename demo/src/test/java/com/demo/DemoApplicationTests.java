@@ -4,6 +4,7 @@ import com.demo.entity.Employee;
 import com.demo.repository.EmployeeRepository;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.weaver.loadtime.Options;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,26 +20,26 @@ class DemoApplicationTests {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	Employee emp  = new Employee();
-	@Test
-	void contextLoads() {
-		System.out.println("Strat");
-	}
-	@BeforeAll
-    static void test1(){
-		System.out.println("Before all method in test case");
-	}
-	@AfterAll
-    static void test2(){
-		System.out.println("After all test case ");
-	}
-	@AfterEach
-	void test3(){
-		System.out.println("After each test case");
-	}
-	@BeforeEach
-	void test4(){
-		System.out.println("Before each method");
-	}
+//	@Test
+//	void contextLoads() {
+//		System.out.println("Strat");
+//	}
+//	@BeforeAll
+//    static void test1(){
+//		System.out.println("Before all method in test case");
+//	}
+//	@AfterAll
+//    static void test2(){
+//		System.out.println("After all test case ");
+//	}
+//	@AfterEach
+//	void test3(){
+//		System.out.println("After each test case");
+//	}
+//	@BeforeEach
+//	void test4(){
+//		System.out.println("Before each method");
+//	}
 
 	@Test
 	void saveRecord(){
@@ -194,5 +195,51 @@ void countRecordUsingEmail(){
 			System.out.println("No record found..");
 		}
 }
+
+@Test
+	void findRecordWithMobileOrEmailId(){
+	List<Employee> _result;
+    _result = employeeRepository.findByEmailIdOrMobile("pashu882@gmail.com","9808507960" );
+    for(Employee employee : _result){
+		System.out.println(employee.getId());
+		System.out.println(employee.getFirstName());
+		System.out.println(employee.getLastName());
+		System.out.println(employee.getEmailId());
+		System.out.println(employee.getMobile());
+	}
+	}
+	@Test
+	void searchRecordByEmail(){
+		Optional<Employee> _employee;
+		_employee =  employeeRepository.searchByEmail("pashu882@gmail.com");
+
+		if(_employee.isPresent()) {
+			Employee emp = _employee.get();
+			System.out.println(emp.getId());
+			System.out.println(emp.getFirstName());
+			System.out.println(emp.getLastName());
+			System.out.println(emp.getEmailId());
+			System.out.println(emp.getMobile());
+		}else{
+			System.out.println("No data found please correct check Email..");
+		}
+	}
+
+	@Test
+	void searchRecordByMobile(){
+	Optional<Employee> _result = employeeRepository.searchByMobile("8279827378");
+		if(_result.isEmpty()){
+			System.out.println("No record found please check mobile number once..");
+		}else{
+
+			Employee _employee = _result.get();
+			System.out.println(_employee.getId());
+			System.out.println(_employee.getFirstName());
+			System.out.println(_employee.getLastName());
+			System.out.println(_employee.getEmailId());
+			System.out.println(_employee.getMobile());
+		}
+
+	}
 
 }
