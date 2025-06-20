@@ -1,5 +1,6 @@
 package com.demo;
 
+import com.demo.entity.Comments;
 import com.demo.entity.Employee;
 import com.demo.entity.Post;
 import com.demo.repository.CommentRepository;
@@ -30,6 +31,8 @@ class DemoApplicationTests {
 	private PostRepository postRepository;
 
 	Employee emp  = new Employee();
+	Comments comments = new Comments();
+	Post post = new Post();
 
 //	@Test
 //	void contextLoads() {
@@ -290,6 +293,18 @@ void countRecordUsingEmail(){
 		post.setTitle("Pyton Course");
 		post.setDescription("Full stack course duration 8 months");
 		postRepository.save(post);
+
+	}
+
+	@Test
+	void writeComments(){
+		Post post = postRepository.findById(1).get();
+		this.comments.setName("Ashu");
+		this.comments.setDescription("very good");
+
+		this.comments.setPost(post);
+		this.commentRepository.save(this.comments);
+
 
 	}
 
