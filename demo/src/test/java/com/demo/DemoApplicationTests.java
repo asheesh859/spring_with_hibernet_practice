@@ -1,7 +1,10 @@
 package com.demo;
 
 import com.demo.entity.Employee;
+import com.demo.entity.Post;
+import com.demo.repository.CommentRepository;
 import com.demo.repository.EmployeeRepository;
+import com.demo.repository.PostRepository;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.weaver.loadtime.Options;
@@ -19,7 +22,15 @@ class DemoApplicationTests {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
+
+	@Autowired
+	private CommentRepository commentRepository;
+
+	@Autowired
+	private PostRepository postRepository;
+
 	Employee emp  = new Employee();
+
 //	@Test
 //	void contextLoads() {
 //		System.out.println("Strat");
@@ -269,7 +280,18 @@ void countRecordUsingEmail(){
 		}else{
 			System.out.println("No data found check email and mobile number .. ");
 		}
-}
+	}
+
+
+	@Test
+	void savePost(){
+
+		Post post = new Post();
+		post.setTitle("Pyton Course");
+		post.setDescription("Full stack course duration 8 months");
+		postRepository.save(post);
+
+	}
 
 }
 
