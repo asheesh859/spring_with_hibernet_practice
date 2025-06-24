@@ -3,6 +3,8 @@ package com.demo.entity;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
+import java.util.List;
+
 @Entity
 @Table(name = "post")
 public class Post {

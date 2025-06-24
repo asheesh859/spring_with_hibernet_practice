@@ -3,9 +3,8 @@ package com.demo;
 import com.demo.entity.Comments;
 import com.demo.entity.Employee;
 import com.demo.entity.Post;
-import com.demo.repository.CommentRepository;
-import com.demo.repository.EmployeeRepository;
-import com.demo.repository.PostRepository;
+import com.demo.entity.Post_1;
+import com.demo.repository.*;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.weaver.loadtime.Options;
@@ -29,6 +28,8 @@ class DemoApplicationTests {
 
 	@Autowired
 	private PostRepository postRepository;
+
+
 
 	Employee emp  = new Employee();
 	Comments comments = new Comments();
@@ -307,6 +308,10 @@ void countRecordUsingEmail(){
 
 
 	}
+
+
+
+
 
 }
 
