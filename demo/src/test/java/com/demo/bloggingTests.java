@@ -53,9 +53,7 @@ class bloggingTests {
 	for(Comments_1 result : comments1List){
 		System.out.println(result.getId());
 		System.out.println(result.getContent());
+		}
 	}
-
-	}
-
 }
 
