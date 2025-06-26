@@ -4,11 +4,13 @@ import com.demo.entity.Bus;
 import com.demo.entity.Stops;
 import com.demo.repository.BusRepository;
 import com.demo.repository.StopRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootTest
 public class BusTesting {
@@ -20,7 +22,7 @@ public class BusTesting {
     private BusRepository busRepository;
 
 @Test
-   public void createBusWithStops(){
+   public void createBusWithStops() {
     Stops s1 = new Stops();
     s1.setStopName("SilkBoard");
 
@@ -30,20 +32,31 @@ public class BusTesting {
     Stops s3 = new Stops();
     s3.setStopName("Water tank");
 
-    stopRepository.saveAll(Arrays.asList(s1,s2,s3));
+    stopRepository.saveAll(Arrays.asList(s1, s2, s3));
 
     Bus b1 = new Bus();
     b1.setBusName("101 Pink");
-    b1.setStops(Arrays.asList(s1,s2));
+    b1.setStops(Arrays.asList(s1, s2));
     Bus b2 = new Bus();
     b2.setBusName("043 Red");
-    b2.setStops(Arrays.asList(s2,s3));
+    b2.setStops(Arrays.asList(s2, s3));
     Bus b3 = new Bus();
     b3.setBusName("103 Yellow");
-    b3.setStops(Arrays.asList(s3,s1));
+    b3.setStops(Arrays.asList(s3, s1));
 
-    busRepository.saveAll(Arrays.asList(b1,b2,b3));
+    busRepository.saveAll(Arrays.asList(b1, b2, b3));
 
+}
+
+@Transactional
+@Test
+    void getBusAndStops(){
+       Bus bus = busRepository.findById(1).orElseThrow();
+        List<Stops> stops = bus.getStops();
+        for(Stops stop : stops){
+            System.out.println(stop.getStopName());
+
+        }
 
     }
 }
