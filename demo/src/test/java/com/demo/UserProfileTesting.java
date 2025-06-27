@@ -27,11 +27,15 @@ public class UserProfileTesting {
         userRepository.save(user);
     }
 
+
     @Test
     void deleteUserProfile(){
 
         userRepository.deleteById(1L);
     }
-
-
+    @Test
+   void updateRecord(){
+       int update = profileRepository.updateBioById(1L, "Python developer");
+       System.out.println(update);
+    }
 }
